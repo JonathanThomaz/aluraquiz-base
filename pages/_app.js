@@ -1,5 +1,8 @@
+
+import Head from 'next/head'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import db from '../db.json'
+
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -30,6 +33,11 @@ const theme = db.theme;
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <meta property="og:title" content={db.title} key="title" />
+        <meta property="og:description" content={db.description} />
+        <meta property="og:image" content={db.bg} key="title" />
+      </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Component {...pageProps} />

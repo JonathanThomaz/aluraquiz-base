@@ -31,7 +31,6 @@ export default function Home() {
     <>
       <Head>
         <title>Bem-Vindo</title>
-        <meta property="og:title" content={db.title} key="title" />
       </Head>
       <QuizBackground backgroundImage={db.bg}>
         <QuizContainer>
