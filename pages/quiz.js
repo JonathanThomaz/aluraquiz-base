@@ -8,7 +8,6 @@ import QuizBackground from '../src/components/QuizBackground'
 import Footer from '../src/components/Footer'
 import GitHubCorner from '../src/components/GitHubCorner'
 import { Button, TextField } from '@material-ui/core'
-import { useState } from 'react';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -21,18 +20,9 @@ export const QuizContainer = styled.div`
   }
 `;
 
-export default function Home() {
-  const [userName, setUserName] = useState();
-
-  const handleChange = (e) => {
-    setUserName(e.target.value)
-  }
+function Quiz({ userName }) {
   return (
     <>
-      <Head>
-        <title>Bem-Vindo</title>
-        <meta property="og:title" content={db.title} key="title" />
-      </Head>
       <QuizBackground backgroundImage={db.bg}>
         <QuizContainer>
           <QuizLogo />
@@ -43,15 +33,7 @@ export default function Home() {
             </Widget.Header>
             <Widget.Content>
               <p>{db.description}</p>
-              <TextField id="outlined-basic" label="Seu nome é?" variant="outlined" onChange={handleChange} />
-              <Link href={{
-                pathname: '/quiz',
-                query: { name: userName }
-              }}>
-                <Button variant="contained" color="primary">
-                  Iniciar Quiz
-              </Button>
-              </Link>
+              <p>Bem vindo ao quiz {userName}</p>
             </Widget.Content>
 
           </Widget>
@@ -70,3 +52,9 @@ export default function Home() {
     </>
   )
 }
+
+Quiz.getInitialProps = async ({ query: { name } }) => {
+  const userName = name;
+  return { userName };
+}
+export default Quiz;
